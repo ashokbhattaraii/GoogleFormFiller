@@ -18,7 +18,7 @@ export async function POST(req: Request) {
 
     const data = JSON.parse(match[1]);
     const items = data[1][1];
-    
+
     // Extract form posting url
     // Usually it's https://docs.google.com/forms/d/e/<FORM_ID>/formResponse
     // data[14] has the form ID string usually
@@ -27,7 +27,7 @@ export async function POST(req: Request) {
       formId = formId.substring(2);
     }
     const postUrl = `https://docs.google.com/forms/d/e/${formId}/formResponse`;
-    
+
     // fbzx
     const fbzxMatch = html.match(/name="fbzx" value="([^"]+)"/);
     const fbzx = fbzxMatch ? fbzxMatch[1] : '';
@@ -50,7 +50,7 @@ export async function POST(req: Request) {
         const subItem = item[4][0];
         const id = subItem[0];
         const required = subItem[2] === 1;
-        
+
         let options = [];
         if (subItem[1] && Array.isArray(subItem[1])) {
           options = subItem[1].map((o: any) => o[0]).filter(Boolean);
